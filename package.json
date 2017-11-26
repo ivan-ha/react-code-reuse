@@ -2,15 +2,36 @@
   "name": "react-code-reuse",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "precommit": "npm run git-hook",
+    "prepush": "npm run git-hook",
+    "git-hook": "npm run lint -s && lint-staged && CI=true npm test -s",
+    "lint": "standard --verbose | snazzy",
+    "lint-fix": "standard --fix"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": ["prettier-standard", "standard --fix", "git add"],
+    "*.json": ["prettier-standard", "git add"]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "envs": ["jest"],
+    "ignore": ["src/registerServiceWorker.js"]
+  },
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-scripts": "1.0.17"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "prettier-standard": "^7.0.3",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3"
   }
 }
