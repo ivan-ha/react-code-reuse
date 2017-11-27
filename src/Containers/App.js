@@ -1,37 +1,42 @@
-import React from 'react'
-import createReactClass from 'create-react-class'
+import React, { PureComponent } from 'react'
 import styles from './styles'
 
-const MouseMixin = {
-  getInitialState () {
-    return {
+const withMouse = WrappedComponent =>
+  class extends PureComponent {
+    state = {
       x: 0,
       y: 0
     }
-  },
 
-  handleMouseMove ({ clientX, clientY }) {
-    this.setState({
-      x: clientX,
-      y: clientY
-    })
+    handleMouseMove = ({ clientX, clientY }) => {
+      this.setState({
+        x: clientX,
+        y: clientY
+      })
+    }
+
+    render () {
+      return (
+        <div onMouseMove={this.handleMouseMove}>
+          <WrappedComponent mouse={this.state} {...this.props} />
+        </div>
+      )
+    }
   }
-}
 
-const App = createReactClass({
-  mixins: [MouseMixin],
-
+class App extends PureComponent {
   render () {
-    const { x, y } = this.state
+    const { message, mouse } = this.props
+    const { x, y } = mouse
 
     return (
-      <div style={styles.container} onMouseMove={this.handleMouseMove}>
+      <div style={styles.container}>
         <h1>
-          The mouse position is ({x}, {y})
+          The mouse position is ({x}, {y}). The message is {message}
         </h1>
       </div>
     )
   }
-})
+}
 
-export default App
+export default withMouse(App)
