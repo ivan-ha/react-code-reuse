@@ -1,21 +1,26 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
+import createReactClass from 'create-react-class'
 import styles from './styles'
 
-class App extends PureComponent {
-  state = {
-    x: 0,
-    y: 0
-  }
+// const App = React.createClass()
+const App = createReactClass({
+  getInitialState () {
+    return {
+      x: 0,
+      y: 0
+    }
+  },
 
-  handleMouseMove = ({ clientX, clientY }) => {
+  handleMouseMove ({ clientX, clientY }) {
     this.setState({
       x: clientX,
       y: clientY
     })
-  }
+  },
 
   render () {
     const { x, y } = this.state
+
     return (
       <div style={styles.container} onMouseMove={this.handleMouseMove}>
         <h1>
@@ -24,6 +29,6 @@ class App extends PureComponent {
       </div>
     )
   }
-}
+})
 
 export default App
