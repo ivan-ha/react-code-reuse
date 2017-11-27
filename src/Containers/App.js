@@ -2,9 +2,7 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 import styles from './styles'
 
-// Dropped in React 16
-// const App = React.createClass()
-const App = createReactClass({
+const MouseMixin = {
   getInitialState () {
     return {
       x: 0,
@@ -17,7 +15,11 @@ const App = createReactClass({
       x: clientX,
       y: clientY
     })
-  },
+  }
+}
+
+const App = createReactClass({
+  mixins: [MouseMixin],
 
   render () {
     const { x, y } = this.state
