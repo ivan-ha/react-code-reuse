@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import styles from './styles'
+import Cat from './withCat'
 
 class Mouse extends PureComponent {
   state = {
@@ -33,6 +34,7 @@ class App extends PureComponent {
           <div style={styles.container}>
             <h1>
               The mouse position is ({x}, {y}). The message is {message}
+              <Cat mouse={{ x, y }} />
             </h1>
           </div>
         )}
