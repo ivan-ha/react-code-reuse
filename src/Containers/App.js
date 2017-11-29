@@ -2,6 +2,7 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 import styles from './styles'
 
+// Dropped in React 16
 // const App = React.createClass()
 const App = createReactClass({
   getInitialState () {
